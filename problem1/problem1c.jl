@@ -1,4 +1,3 @@
-#Julia Newton's Law of Cooling real world graph
 using Plots
 
 # Model Parameters
@@ -6,7 +5,6 @@ Ta = 25.0
 k = 0.061904
 T0 = 90.0
 
-# Define the ODE function
 f(t, T) = -k * (T - Ta)
 
 # Create grid for slope field
@@ -25,7 +23,11 @@ t_fine = 0:0.1:60
 
 # Plotting
 quiver(t_grid, T_grid, quiver=(u, v), arrow=arrow(:closed, :head, 0.1, 0.1), 
-       title="Newton's Law of Cooling: Coffee", xlabel="Time (min)", ylabel="Temp (C)", 
+       title="Newton's Law of Cooling: Coffee", 
+       xlabel="Time (min)", ylabel="Temp (C)", 
        color=:gray, alpha=0.5, label="Slope Field")
-p = plot!(t_fine, sol.(t_fine), color=:red, linewidth=3, label="Particular Solution (90C to 20C)")
+
+p = plot!(t_fine, sol.(t_fine), color=:red, linewidth=3, 
+       label="Particular Solution (90C to 20C)")
+
 savefig(p, "coolingCoffee.png")
