@@ -83,4 +83,4 @@ p = plot(
 plot!(p, xm, ym; label="Midpoint Approximation", color=:red, linewidth=2)
 plot!(p, xr, yr; label="RK4 Approximation", color=:green, linewidth=2)
 
-display(p)
+savefig(p, "problem2_5.png")
