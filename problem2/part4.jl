@@ -1,12 +1,15 @@
 using Plots
 
 # TODO: Put Parameters here
-Ta = 25.0
-k = 0.061904
-T0 = 90.0
+B = 15
+A = 10
+omega = pi/12
+phi = -((3*pi)/4)
+k = 0.4
+T0 = 85
 
 # TODO: Put found Solution here
-f(t, T) = -k * (T - Ta)
+f(t, T) = k*(A*cos(omega*t + phi) + B) - k*T
 
 # Create grid for slope field
 trange = 0:5:60
@@ -19,17 +22,17 @@ u = ones(size(t_grid)) # Horizontal component
 v = f.(t_grid, T_grid) # Vertical component (slope)
 
 # TODO: Particular solution goes here
-sol(t) = Ta + (T0 - Ta) * exp(-k * t)
+sol(t) = 17.64*(cos(omega*t - phi) + omega*sin(omega*t - phi)) + B + 85.64*exp(-k*t)
 t_fine = 0:0.1:60
 
 # TODO: Change title as needed
 quiver(t_grid, T_grid, quiver=(u, v), arrow=arrow(:closed, :head, 0.1, 0.1), 
-       title="CHANGE THIS", 
-       xlabel="Time (min)", ylabel="Temp (C)", 
+       title="Coffee Outside in Boston", 
+       xlabel="Time (Hours)", ylabel="Temp (C)", 
        color=:gray, alpha=0.5, label="Slope Field")
 
 # TODO: Change title as needed. This is for Particular solution
 p = plot!(t_fine, sol.(t_fine), color=:red, linewidth=3, 
-       label="Particular Solution (90C to 20C)")
+       label="Particular Solution")
 
 savefig(p, "problem2_4.png")
